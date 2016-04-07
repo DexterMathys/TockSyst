@@ -1,0 +1,114 @@
+<div class="container text-center">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <% if current_user.role == 'admin' || current_user.role == 'stock' %>
+                <li class="#">
+                  <a class="active" href="/stock"><i class="fa fa-file-text"></i> Stock</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'compras' %>
+                <li class="#">
+                  <a class="active" href="/compras"><i class="fa fa-file-text"></i> Compras</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'ventas' %>
+                <li class="#">
+                  <a class="active" href="/ventas"><i class="fa fa-file-text"></i> Ventas</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'proveedores' || current_user.role == 'compras' %>
+                <li class="#">
+                  <a class="active" href="/proveedors"><i class="fa fa-users"></i> Proveedores</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'clientes' || current_user.role == 'ventas' %>
+                <li class="#">
+                  <a class="active" href="/clientes"><i class="fa fa-users"></i> Clientes</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' %>
+                <li class="#">
+                  <a class="active" href="/usuarios"><i class="fa fa-users"></i> Usuarios</a>
+                </li>
+            <% end %>
+            <li class="active">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="text-primary page-header">
+    <h1>
+      Bienvenido a TockSyst
+    </h1>
+  </div>
+  <div class="text-primary">
+    <h2>Editar perfil</h2>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <% if devise_error_messages! != "" %>
+      <div class="alert alert-danger">
+        <%= devise_error_messages! %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+      <br>
+
+    <div class="field">
+      <%= f.label :nueva_contraseña %><br><i>(Deja en blanco si no la quieres cambiar)</i> <br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+      <br>
+
+    <div class="field">
+      <%= f.label :confirmar_nueva_contraseña %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+      <br>
+
+    <div class="field">
+      <%= f.label :contraseña_actual %><br><i>(Necesaria para guardar los cambios)</i><br />
+      <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
+<br>
+    <div class="actions">
+      <%= f.submit "Guardar", :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+  <hr>
+  <div class="text-primary">
+    <h3>Eliminar cuenta?</h3>
+  </div>
+  <%= button_to "Eliminar", registration_path(resource_name), method: :delete, :class => 'btn btn-primary' %></p>
+
+</div>

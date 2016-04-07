@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock"><i class="fa fa-file-text"></i> Stock</a>
+            </li>
+
+            <li class="active">
+              <a class="active" href=""><i class="fa fa-pencil-square"></i> Modificar producto</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/nuevo"><i class="fa fa-file-text"></i> Nuevo producto</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/lista"><i class="fa fa-file-text"></i> Lista de precios</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary page-header">
+        <h1>
+          Sector de Stock - Modificar producto
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form class="text-center" method="POST" action="/stock/update">
+      <table class="table table-bordered table-striped table-hover">
+        <tr>
+          <th>
+            Nombre
+          </th>
+          <th>
+            Descripción
+          </th>
+          <th>
+            Cantidad
+          </th>
+          <th>
+            Precio de Compra
+          </th>
+          <th>
+            Precio de Venta
+          </th>
+          <th>
+            Estado
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="Nombre" value="<%= @producto.nombre %>" required>
+          </td>
+          <td>
+            <input type="text" name="Descripcion" value="<%= @producto.descripcion %>">
+          </td>
+          <td>
+            <input type="number" min="0" name="Cantidad" value="<%= @producto.cantidad %>" required>
+          </td>
+          <td>
+            <input type="number" step="0.05" min="0" max="1000000" name="PrecioDeCompra" value="<%= @producto.precioCompra %>" required>
+          </td>
+          <td>
+            <input type="number" step="0.05" min="0" max="1000000" name="PrecioDeVenta" value="<%= @producto.precioVenta %>" required>
+          </td>
+          <td>
+            <select name="Estado" class="btn btn-primary" required>
+              <% if @producto.estado == 'Activo' %>
+                <option value="Activo" selected>Activo</option>
+                <option value="Inactivo" >Inactivo</option>
+              <% else %>
+                <option value="Inactivo" selected>Inactivo</option>
+                <option value="Activo" >Activo</option>
+              <% end %>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <input type="submit" class="btn btn-primary" name="nuevo" value="&#x2713; Aceptar">
+      <input type="hidden"  name="id" value="<%= @producto.id %>">
+    </form>
+  </div>
+</div>

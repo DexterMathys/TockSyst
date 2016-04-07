@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Rails TockSyst: test" uuid="86bdfba6-6004-47b0-bc1e-eeb5de9ba4e9">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails TockSyst: development" uuid="a1a30114-35ee-4f07-97ea-b14587836600">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails TockSyst: production" uuid="7c978e2f-f509-4506-b3e9-dd6dd9e166d4">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

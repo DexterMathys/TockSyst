@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <li class="active">
+              <a class="active" href="/usuarios"><i class="fa fa-users"></i> Usuarios</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary page-header">
+        <h1>
+          Sector de Usuarios
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% if @mensaje != nil %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert <%= @alert %>">
+            <%= @mensaje %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <div class="row text-center">
+    <legend class="text-primary">
+      <h3>
+        Usuarios:
+      </h3>
+    </legend>
+
+    <table Class="table table-bordered table-striped table-hover text-center">
+      <tr>
+        <th>
+          Email
+        </th>
+        <th>
+          Tipo de perfil
+        </th>
+        <th>
+          Guardar
+        </th>
+      </tr>
+      <% if @usuarios != nil %>
+          <% @usuarios.each do |usuario| %>
+              <tr>
+                <form class="text-center" method="POST" action="/usuarios/update">
+                  <td>
+                    <%= usuario.email %>
+                  </td>
+                  <td>
+                    <select name="rol" class="btn btn-primary">
+                      <option value="" <% if usuario.role == "" %>selected="selected"<% end %>>
+
+                      </option>
+                      <option value="admin" <% if usuario.role == "admin" %>selected="selected"<% end %>>
+                        Admin
+                      </option>
+                      <option value="stock" <% if usuario.role == "stock" %>selected="selected"<% end %>>
+                        Stock
+                      </option>
+                      <option value="compras" <% if usuario.role == "compras" %>selected="selected"<% end %>>
+                        Compras
+                      </option>
+                      <option value="ventas" <% if usuario.role == "ventas" %>selected="selected"<% end %>>
+                        Ventas
+                      </option>
+                      <option value="proveedores" <% if usuario.role == "proveedores" %>selected="selected"<% end %>>
+                        Proveedores
+                      </option>
+                      <option value="clientes" <% if usuario.role == "clientes" %>selected="selected"<% end %>>
+                        Clientes
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="hidden"  name="id" value="<%= usuario.id %>">
+                    <input type="submit" class="btn btn-primary" name="guardar" value="Guardar">
+                  </td>
+                </form>
+              </tr>
+          <% end %>
+      <% end %>
+    </table>
+
+  </div>
+</div>

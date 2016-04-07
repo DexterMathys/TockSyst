@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <li class="#">
+              <a class="active" href="/proveedors"><i class="fa fa-users"></i> Proveedores</a>
+            </li>
+            <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+                <li class="#">
+                  <a class="active" href="/proveedors/nuevo"><i class="fa fa-user-plus"></i> Nuevo</a>
+                </li>
+            <% end %>
+
+            <li class="active">
+              <a class="active" href="/proveedors/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary">
+        <h1>
+          Sector de proveedores - Ayuda
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="text-primary">
+            <h3>
+
+            </h3>
+          </legend>
+          <div class="well">
+            Proveedores te servirá a la hora que necesites realizar alguna operación sobre tus
+            proveedores, es decir cuando tengas que dar de alta, modificar los datos o dar de baja
+            algún proveedor. Es un área sencilla en donde, primeramente se listarán todos tus
+            proveedores, y luego podrás utilizar los buscadores para poder modificar o eliminar
+            algún proveedor.
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="text-primary">
+            <h3>
+              Nuevo proveedor
+            </h3>
+          </legend>
+          <div class="well">
+            Para dar de alta a un nuevo
+            proveedor debes ingresar en la pestaña Nuevo. Aquí se desplegará
+            un formulario que solicitará ingresar los datos pertinentes al
+            proveedor, el nombre (como máximo 40 carateres, exceptuando
+            caracteres especiales como !, #, $, %, etc), teléfono (como máximo
+            20 dígitos) y un monto de deuda (pudiendo ser una deuda positiva o
+            negativa). Luego de ingresar todos los datos debes presionar
+            Aceptar y el proveedor será dado de alta.
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="text-primary">
+            <h3>
+              Eliminar proveedor
+            </h3>
+          </legend>
+          <div class="well">
+            Para eliminar un
+            proveedor debemos primero ubicarlo a través del buscador presente en
+            la ventana principal de la sección de proveedores. Podemos buscar a un
+            proveedor por su nombre (máximo 40 caracteres, exceptuando caracteres
+            especiales como !, #, $, %, etc), ingresándolo y luego presionando
+            Buscar. Al encontrar al proveedor se visualizarán 2 botones, Modificar
+            y Eliminar. Presionas en Eliminar y el proveedor será dado de baja.
+            Si en algún momento deseas volver a dar de alta al proveedor podrás
+            hacerlo desde la sección deModificar proveedor.
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="text-primary">
+            <h3>
+              Modificar proveedor
+            </h3>
+          </legend>
+          <div class="well">
+            Para modificar un
+            proveedor debemos primero ubicarlo a través del buscador presente en
+            la ventana principal de la sección de proveedores. Podemos buscar a un
+            proveedor por su nombre (máximo 40 caracteres, exceptuando caracteres
+            especiales como !, #, $, %, etc), ingresándolo y luego presionando
+            Buscar. Al encontrar al proveedor se visualizarán 2 botones, Modificar
+            y Eliminar. Presionas en Modificar y el sistema te redireccionará a
+            la ventana de Modificar proveedor. Se mostrarán todos los datos del
+            proveedor para que los puedas modificar. Además de los datos del
+            proveedor también se verá su Estado (0 = dado de baja y 1 = dado de
+            alta), si cambias este parámetro podrás dar de baja a un proveedor
+            activo o dar de alta a un proveedor inactivo.
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <% if current_user.role == 'compras' %>
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="text-primary">
+            <h3>
+
+            </h3>
+          </legend>
+          <div class="well">
+            En el área de Proveedores podrás visualizar listados de tus proveedores dados de alta y de aquellos que
+            hayas dado de baja. También podrás utilizar el buscador para localizar a un proveedor determinado y ver
+            todos sus datos.
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

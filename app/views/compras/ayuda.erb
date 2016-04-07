@@ -1,0 +1,128 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/compras"><i class="fa fa-file-text"></i> Compras</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/compras/nueva"><i class="fa fa-file-text"></i> Nueva compra</a>
+            </li>
+
+            <li class="active">
+              <a class="active" href="/compras/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary">
+        <h1>
+          Sector de compras - Ayuda
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+
+        </h3>
+      </legend>
+      <div class="well">
+        La sección de compras te permitirá registrar todas las compras que realices a tus
+        proveedores. Al ingresar dispondrás de una serie de buscadores que te servirán para encontrar
+        las compras ya realizadas y asentadas en el sistema. En la subdivisión de Nueva compra será
+        donde subirás tus compras nuevas, contándo también con diversas herramientas que facilitarán
+        el alta de la misma.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+          Buscar compras realizadas
+        </h3>
+      </legend>
+      <div class="well">
+        Para buscar
+        las compras que has realizado con anterioridad puedes utilizar los
+        buscadores en la pantalla principal de Compras. Puedes buscar
+        compras por número, ingresando un número de compra (mayor
+        a 0) y luego preionando buscar para que aparesca la compra buscada,
+        también la puedes buscar por proveedor, ingresando el nombre del
+        proveedor (nombre de como máximo 40 caracteres, excepto caracteres
+        especiales como !, #, $, %, etc) y luego presionar Buscar para que
+        aparescan todas las compras realizadas al proveedor en cuestión, o
+        también se pueden buscar por fecha, ingresando la fecha de la compra
+        (la misma puede ser ingresada manualmente o presionando la flecha a
+        la derecha del campo, que desplegará el calendario y seleccionarla
+        desde alli. En el calendario podrás clickear sobre el circulo negro
+        y esto ingresará la fecha actual) y luego presionar Buscar para que
+        aparescan todas las compras realizadas en esta fecha. Una vez que
+        aparecen la/s compra/s buscada/s, presionando en Ver podrás ver
+        los datos principales de la/s compra/s, número de compra, el
+        proveedor de la compra, la fecha de la compra y el monto total a
+        pagar por la compra
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+          Nueva compra
+        </h3>
+      </legend>
+      <div class="well">
+        Para dar de alta una nueva
+        compra debemos ir a la pestaña de Nueva compra. Aquí se desplegará
+        un formulario que te solicitará una fecha y el nombre de un
+        proveedor. Una vez completados estos datos es momento de agregar
+        productos a la compra. Para esto utilizarás los buscadores. Podrás
+        buscar productos por nombre
+        (como máximo 40 caracteres, exceptuando caracteres especiales
+        como !, #, $, %, etc) ingresando el nombre del producto y
+        presionando en Buscar. Una vez encontrado el producto debes
+        ingresar una cantidad a comprar (un número mayor a 0) y
+        presionar Agregar. Esto agregará el producto deseado con su
+        cantidad a la compra, calculando el subtotal por producto y el
+        total final de la compra. Deberás repetir estos pasos hasta haber
+        agregado todos los productos deseados a la compra. Una vez que
+        terminaste de agregar, verás el monto total de la compra y deberás
+        ingresar el monto total a pagar por la compra y luego presionar
+        Terminar compra.
+      </div>
+    </div>
+  </div>
+</div>

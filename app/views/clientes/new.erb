@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <li class="#">
+              <a class="active" href="/clientes"><i class="fa fa-users"></i> Clientes</a>
+            </li>
+            <% if current_user.role == 'clientes' || current_user.role == 'admin' %>
+                <li class="active">
+                  <a class="active" href="/clientes/nuevo"><i class="fa fa-user-plus"></i> Nuevo</a>
+                </li>
+            <% end %>
+
+            <li class="#">
+              <a class="active" href="/clientes/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary page-header">
+        <h1>
+          Sector de Clientes - Nuevo cliente
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% if @mensaje != nil %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert <%= @alert %>">
+            <%= @mensaje %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <div class="row">
+    <form class="text-center" method="POST" action="/clientes/nuevo">
+      <table class="table table-bordered table-striped table-hover">
+        <tr>
+          <th>
+            Nombre
+          </th>
+          <th>
+            Dirección
+          </th>
+          <th>
+            Teléfono
+          </th>
+          <th>
+            Deuda
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="Nombre" required>
+          </td>
+          <td>
+            <input type="text" name="Direccion">
+          </td>
+          <td>
+            <input type="phone" name="Teléfono">
+          </td>
+          <td>
+            <input type="number" step="0.05" name="Deuda" required>
+          </td>
+        </tr>
+      </table>
+      <input type="submit" class="btn btn-primary" name="nuevo" value="&#x2713; Aceptar">
+    </form>
+  </div>
+</div>

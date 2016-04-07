@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails TockSyst: test" uuid="86bdfba6-6004-47b0-bc1e-eeb5de9ba4e9">
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails TockSyst: development" uuid="a1a30114-35ee-4f07-97ea-b14587836600">
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails TockSyst: production" uuid="7c978e2f-f509-4506-b3e9-dd6dd9e166d4">
+      <first-sync>true</first-sync>
+    </data-source>
+  </component>
+</project>

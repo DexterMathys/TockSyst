@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">Tocksyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock"><i class="fa fa-file-text"></i> Stock</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/nuevo"><i class="fa fa-file-text"></i> Nuevo producto</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/lista"><i class="fa fa-file-text"></i> Lista de precios</a>
+            </li>
+
+            <li class="active">
+              <a class="active" href="/stock/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary">
+        <h1>
+          Sector de stock - Ayuda
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+
+        </h3>
+      </legend>
+      <div class="well">
+        En el Sector de Stock se presenta una
+        lista de todos los productos dados de alta, y además, una con los
+        productos dados de baja, si es que existen. Esta área está subdividida
+        en otras 2 más: Nuevo y Lista de precios. En las
+        cuales podrás dar de alta un nuevo producto y formular una lista de
+        precios para tus clientes. También
+        aquí podrás modificar o dar de baja tus productos, utilizando los
+        buscadores para localizarlos.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+          Nuevo producto
+        </h3>
+      </legend>
+      <div class="well">
+        Para dar de alta un nuevo
+        producto debes ingresar en la pestaña Nuevo. Una vez aquí se presentará
+        un formulario que deberás completar con los datos necesarios para cada
+        producto. El nombre y la descripción deben estar formadas por cualquier
+        caracter, exceptuando a los carateres especiales (por ejémplo: @, #,!,?,
+        $, etc), el nombre debe tener como máximo 40 caracteres, la descripción es
+        opcional y debe tener como máximo 140 caracteres, la cantidad debe ser un
+        número mayor o igual a 0 y debe tener como máximo 11 dígitos, y el precio de
+        compra y el de venta deben ser números mayores o iguales a 0. Una vez
+        completados todos los campos obligatorios (la descripción es opcional)
+        presioná en Aceptar y se dará de alta.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+          Eliminar producto
+        </h3>
+      </legend>
+      <div class="well">
+        Para dar de baja un
+        producto del stock debemos utilizar los buscadores del sector de stock.
+        Los productos pueden ser buscados por código o por nombre, completando
+        el campo requerido y presionando el botón Buscar. Una vez
+        encontrado el producto se presentarán 2 botones, uno de Modificar y el
+        otro de Eliminar. Presionas en Eliminar y el producto se dará de baja.
+        Los productos dados de baja apareceran en la lista de stock de productos
+        dados de baja. Si en algún momento quieres dar de alta nuevamente ese
+        producto, podrás utlizar los buscadores y al encontrarlo deberas
+        modificarle el campo Estado.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+          Modificar producto
+        </h3>
+      </legend>
+      <div class="well">
+        Para modificar un
+        producto del stock debemo utilizar los buscadores del sector de stock.
+        Podemos buscar los productos por nombre completando el
+        campo requerido y presionando el botón Buscar. Una vez encontrado el
+        producto se presentarán 2 botones, uno de Modificar y el otro de Eliminar.
+        Presionamos en Modificar y aparecerá un formulario con todos los datos
+        del producto. Podrás modificar todos los campos del formulario con los
+        mismo datos especificados en la sección de Nuevo producto, y además
+        podras modificar el estado del producto que puede ser dado de alta
+        o dado de baja.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <legend class="text-primary">
+        <h3>
+          Lista de precios
+        </h3>
+      </legend>
+      <div class="well">
+        Para poder imprimir una
+        lista de precios con todos los productos del stock, debemos ir a la
+        pestaña de Lista de precios. Aquí se desplegará una lista con todos los
+        precios y datos de los productos y para imprimirla debes cliquear con
+        el botón derecho del mouse en cualquier lugar de la pantalla y elegir
+        Imprimir. Cuando la ventana de impresión se abra debes presionar
+        Imprimir.
+      </div>
+    </div>
+  </div>
+</div>

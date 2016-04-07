@@ -1,0 +1,300 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <li class="active">
+              <a class="active" href="/proveedors"><i class="fa fa-users"></i> Proveedores</a>
+            </li>
+            <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+                <li class="#">
+                  <a class="active" href="/proveedors/nuevo"><i class="fa fa-user-plus"></i> Nuevo</a>
+                </li>
+            <% end %>
+
+            <li class="#">
+              <a class="active" href="/proveedors/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary page-header">
+        <h1>
+          Sector de Proveedores
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form class="text-center" method="POST" action="/proveedors/buscar">
+      Buscar proveedor:
+      <input type="text" name="nombre" required>
+      <input type="submit" class="btn btn-primary" name="buscar" value="Buscar">
+    </form>
+    <hr>
+  </div>
+  <div class="row">
+  </div>
+  <% if @mensaje != nil %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert <%= @alert %>">
+            <%= @mensaje %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <% if @busqueda != nil %>
+      <div class="row">
+        <legend class="text-primary">
+          <h3>
+            Resultado de la búsqueda:
+          </h3>
+        </legend>
+        <% if @proveedor != nil %>
+
+            <table Class="table table-bordered table-striped table-hover">
+              <tr>
+                <th>
+                  Nombre
+                </th>
+                <th>
+                  Dirección
+                </th>
+                <th>
+                  Teléfono
+                </th>
+                <th>
+                  Deuda
+                </th>
+                <th>
+                  Estado
+                </th>
+                <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+                    <th>
+                      Modificar
+                    </th>
+                    <% if @proveedor.estado == "Activo" %>
+                        <th>
+                          Borrar
+                        </th>
+                    <% else %>
+                        <th>
+                          Dar de alta
+                        </th>
+                    <% end %>
+                <% end %>
+              </tr>
+              <tr>
+                <td>
+                  <%= @proveedor.nombre %>
+                </td>
+                <td>
+                  <%= @proveedor.direccion %>
+                </td>
+                <td>
+                  <%= @proveedor.telefono %>
+                </td>
+                <td>
+                  <%= @proveedor.deuda %>
+                </td>
+                <td>
+                  <%= @proveedor.estado %>
+                </td>
+                <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+                    <% if @proveedor.estado == "Activo" %>
+                        <td>
+                          <form class="text-center" method="POST" action="/proveedors/edit">
+                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
+                            <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                          </form>
+                        </td>
+                        <td>
+                          <form class="text-center" method="POST" action="/proveedors/eliminar">
+                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
+                            <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+                          </form>
+                        </td>
+                    <% else %>
+                        <td>
+                          <form class="text-center" method="POST" action="/proveedors/edit">
+                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
+                            <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                          </form>
+                        </td>
+                        <td>
+                          <form class="text-center" method="POST" action="/proveedors/alta">
+                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
+                            <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                          </form>
+                        </td>
+                    <% end %>
+                <% end %>
+              </tr>
+            </table>
+      <% else %>
+        <div class="alert alert-danger">
+          No se encontró ningún proveedor con ese nombre
+        </div>
+      <% end %>
+      </div>
+      <hr>
+  <% end %>
+  <div class="row">
+    <legend class="text-primary">
+      <h3>
+        Proveedores:
+      </h3>
+    </legend>
+    <table Class="table table-bordered table-striped table-hover">
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Dirección
+        </th>
+        <th>
+          Teléfono
+        </th>
+        <th>
+          Deuda
+        </th>
+        <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+            <th>
+              Modificar
+            </th>
+            <th>
+              Borrar
+            </th>
+      <% end %>
+      </tr>
+      <% if @proveedores != nil %>
+          <% @proveedores.each do |proveedor| %>
+              <tr>
+                <td>
+                  <%= proveedor.nombre %>
+                </td>
+                <td>
+                  <%= proveedor.direccion %>
+                </td>
+                <td>
+                  <%= proveedor.telefono %>
+                </td>
+                <td>
+                  <%= proveedor.deuda %>
+                </td>
+                <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+                    <td>
+                      <form class="text-center" method="POST" action="/proveedors/edit">
+                        <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                        <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                      </form>
+                    </td>
+                    <td>
+                      <form class="text-center" method="POST" action="/proveedors/eliminar">
+                        <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                        <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+                      </form>
+                    </td>
+              <% end %>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+  <div class="row">
+    <legend class="text-primary">
+      <h3>
+        Proveedores dados de baja:
+      </h3>
+    </legend>
+    <table Class="table table-bordered table-striped table-hover">
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Dirección
+        </th>
+        <th>
+          Teléfono
+        </th>
+        <th>
+          Deuda
+        </th>
+        <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+            <th>
+              Modificar
+            </th>
+            <th>
+              Dar de alta
+            </th>
+      <% end %>
+      </tr>
+      <% if @proveedoresBaja != nil %>
+          <% @proveedoresBaja.each do |proveedor| %>
+              <tr>
+                <td>
+                  <%= proveedor.nombre %>
+                </td>
+                <td>
+                  <%= proveedor.direccion %>
+                </td>
+                <td>
+                  <%= proveedor.telefono %>
+                </td>
+                <td>
+                  <%= proveedor.deuda %>
+                </td>
+                <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+
+                    <td>
+                      <form class="text-center" method="POST" action="/proveedors/edit">
+                        <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                        <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                      </form>
+                    </td>
+                    <td>
+                      <form class="text-center" method="POST" action="/proveedors/alta">
+                        <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                        <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                      </form>
+                    </td>
+              <% end %>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

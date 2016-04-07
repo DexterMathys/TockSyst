@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="active">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <% if current_user.role == 'admin' || current_user.role == 'stock' %>
+                <li class="#">
+                  <a class="active" href="/stock"><i class="fa fa-file-text"></i> Stock</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'compras' %>
+                <li class="#">
+                  <a class="active" href="/compras"><i class="fa fa-file-text"></i> Compras</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'ventas' %>
+                <li class="#">
+                  <a class="active" href="/ventas"><i class="fa fa-file-text"></i> Ventas</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'proveedores' || current_user.role == 'compras' %>
+                <li class="#">
+                  <a class="active" href="/proveedors"><i class="fa fa-users"></i> Proveedores</a>
+                </li>
+             <% end %>
+            <% if current_user.role == 'admin' || current_user.role == 'clientes' || current_user.role == 'ventas' %>
+                <li class="#">
+                  <a class="active" href="/clientes"><i class="fa fa-users"></i> Clientes</a>
+                </li>
+            <% end %>
+            <% if current_user.role == 'admin' %>
+                <li class="#">
+                  <a class="active" href="/usuarios"><i class="fa fa-users"></i> Usuarios</a>
+                </li>
+            <% end %>
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary page-header">
+        <h1>
+          Bienvenido a TockSyst
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% if flash[:error] %>
+      <div class="alert alert-danger">
+          <h4><%= flash[:error] %></h4>
+      </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-12 text-center well">
+      Este sistema le brindará facilidades para un correcto control de stock y ventas.
+      Cuenta con una numerosa gama de utilidades, entre las cuales se destacan la administración
+      del stock, las compras y ventas realizadas por tí y sectores especializados en la gestión
+      de proveedores y clientes.
+      Además si en algún momento no sabés como manejarte dentro del sistema, cada sector cuenta
+      con su propio apartado dirigido a solucionar todas tus dudas e inquitudes, asi que no temas
+      en revisarlo cuando sientas que es necesario. Saludos y gracias
+      por la adquisición de este producto.
+    </div>
+  </div>
+  <div class="row text-center">
+    <hr>
+    <% if current_user.role == 'admin' || current_user.role == 'stock' %>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            <a class="active" href="/stock"><i class="fa fa-file-text"></i> Stock</a>
+          </h3>
+          <hr>
+          <div class="well">
+            En el Sector de Stock se presenta una lista de todos los productos dados de alta, y además,
+            una con los productos dados de baja, si es que existen. Esta área está subdividida en otras 2
+            más: Nuevo y Lista de precios. En las cuales podrás dar de alta un nuevo
+            producto y formular una lista de precios para tus clientes.
+            También aquí podrás modificar o dar de baja tus productos, utilizando los buscadores para
+            localizarlos o viéndolos en la lista del stock.
+          </div>
+        </div>
+    <% end %>
+    <% if current_user.role == 'admin' || current_user.role == 'compras' %>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            <a class="active" href="/compras"><i class="fa fa-file-text"></i> Compras</a>
+          </h3>
+          <hr>
+          <div class="well">
+            La sección de compras te permitirá registrar todas las compras que realices a tus
+            proveedores. Al ingresar dispondrás de una serie de buscadores que te servirán para encontrar
+            las compras ya realizadas y asentadas en el sistema. En la subdivisión de Nueva compra será
+            donde subirás tus compras nuevas, contándo también con diversas herramientas que facilitarán
+            el alta de la misma.
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            Proveedores
+          </h3>
+          <hr>
+          <div class="well">
+            En el área de Proveedores podrás visualizar listados de tus proveedores dados de alta y de aquellos que
+            hayas dado de baja. También podrás utilizar el buscador para localizar a un proveedor determinado y ver
+            todos sus datos.
+          </div>
+        </div>
+    <% end %>
+    <% if current_user.role == 'admin' || current_user.role == 'ventas' %>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            <a class="active" href="/ventas"><i class="fa fa-file-text"></i> Ventas</a>
+          </h3>
+          <hr>
+          <div class="well">
+            Similar al sector de compras, aquí también encontraras buscadores para hallar tus ventas
+            realizadas. Al clickear en el botón de Ver podrás tener una vista sobre los datos de dicha
+            venta. Para dar de alta una venta deberás acceder a la sección de Nueva venta, en donde se
+            desplegará todo lo necesario para que puedas realizar un alta exitoso de tu venta.
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            Clientes
+          </h3>
+          <hr>
+          <div class="well">
+            En el área de Clientes podrás visualizar listados de tus clientes dados de alta y de aquellos que
+            hayas dado de baja. También podrás utilizar el buscador para localizar a un cliente determinado y ver
+            todos sus datos.
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="row text-center">
+    <% if current_user.role == 'admin' || current_user.role == 'proveedores'%>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            <a class="active" href="/proveedors"><i class="fa fa-users"></i> Proveedores</a>
+          </h3>
+          <hr>
+          <div class="well">
+            Proveedores te servirá a la hora que necesites realizar alguna operación sobre tus
+            proveedores, es decir cuando tengas que dar de alta, modificar los datos o dar de baja
+            algún proveedor. Es un área sencilla en donde, primeramente se listarán todos tus
+            proveedores, y luego podrás utilizar los buscadores para poder modificar o eliminar
+            algún proveedor.
+          </div>
+        </div>
+    <% end %>
+    <% if current_user.role == 'admin' || current_user.role == 'clientes'%>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            <a class="active" href="/clientes"><i class="fa fa-users"></i> Clientes</a>
+          </h3>
+          <hr>
+          <div class="well">
+            Al igual que en el sector de Proveedores, el área de Clientes te facilitará la tarea de
+            organizar a todos tus clientes. Aquí te será posible administrar, es decir dar de alta,
+            modificar o dar de baja, a tus clientes y sus datos. Para poder acceder al alta de cliente
+            tendrás que clickear sobre Nuevo, y para poder realizar una modificación o eliminación tendrás
+            que utilizar los buscadores o localizarlos en la lista de clientes.
+          </div>
+        </div>
+    <% end %>
+    <% if current_user.role == 'admin' %>
+        <div class="col-md-12">
+          <h3 class="text-primary">
+            <a class="active" href="/usuarios"><i class="fa fa-users"></i> Usuarios</a>
+          </h3>
+          <hr>
+          <div class="well">
+            En el sector de Usuarios podras administrar los permisos de cada usuario, es decir otorgar o quitar
+            los distintos tipos de permisos para acceder a las diferentes secciones del sistema.
+            Los posibles permisos son:
+             -Admin: Este permiso te da acceso a la totalidad del sistema.
+             -Stock: Este permiso te da acceso al sector de stock.
+             -Compras: Este permiso te da acceso al sector de compras, y además puedes visualizar un listado de
+            proveedores en el sector de proveedores.
+             -Ventas: Este permiso te da acceso al sector de ventas, y además puedes visualizar un listado de
+            clientes en el sector de clientes.
+             -Proveedores: Este permiso te da acceso al sector de proveedores.
+             -Clientes: Este permiso te da acceso al sector de clientes.
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <% if current_user.role == nil || current_user.role == '' %>
+      <div class="alert alert-danger">
+        Aún no tienes permiso para acceder al sistema, espera hasta que el administrador te conceda uno.
+      </div>
+  <% end %>
+</div>

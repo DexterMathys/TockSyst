@@ -1,0 +1,306 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+
+            <li class="active">
+              <a class="active" href="/stock"><i class="fa fa-file-text"></i> Stock</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/nuevo"><i class="fa fa-file-text"></i> Nuevo producto</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/lista"><i class="fa fa-file-text"></i> Lista de precios</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="/stock/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary page-header">
+        <h1>
+          Sector de Stock
+        </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form class="text-center" method="POST" action="/stock/buscar">
+        Buscar producto:
+        <input type="text"  name="nombre" required>
+        <input type="submit" class="btn btn-primary" name="boton_nombre" value="Buscar">
+      </form>
+    </div>
+  </div>
+  <hr>
+  <% if @mensaje != nil %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert <%= @alert %>">
+            <%= @mensaje %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <% if @busqueda != nil %>
+    <div class="row">
+      <legend class="text-primary">
+        <h3>
+          Resultado de la búsqueda:
+        </h3>
+      </legend>
+      <% if @producto != nil %>
+
+          <table Class="table table-bordered table-striped table-hover">
+            <tr>
+              <th>
+                Nombre
+              </th>
+              <th>
+                Descripción
+              </th>
+              <th>
+                Cantidad
+              </th>
+              <th>
+                Precio de Compra
+              </th>
+              <th>
+                Precio de Venta
+              </th>
+              <th>
+                Estado
+              </th>
+              <th>
+                Modificar
+              </th>
+              <% if @producto.estado == "Activo" %>
+                  <th>
+                    Borrar
+                  </th>
+              <% else %>
+                  <th>
+                    Dar de alta
+                  </th>
+              <% end %>
+            </tr>
+            <tr>
+              <td>
+                <%= @producto.nombre %>
+              </td>
+              <td>
+                <%= @producto.descripcion %>
+              </td>
+              <td>
+                <%= @producto.cantidad %>
+              </td>
+              <td>
+                <%= @producto.precioCompra %>
+              </td>
+              <td>
+                <%= @producto.precioVenta %>
+              </td>
+              <td>
+                <%= @producto.estado %>
+              </td>
+              <% if @producto.estado == "Activo" %>
+                  <td>
+                    <form class="text-center" method="POST" action="/stock/edit">
+                      <input type="hidden"  name="id" value="<%= @producto.id %>">
+                      <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                    </form>
+                  </td>
+                  <td>
+                    <form class="text-center" method="POST" action="/stock/eliminar">
+                      <input type="hidden"  name="id" value="<%= @producto.id %>">
+                      <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+                    </form>
+                  </td>
+              <% else %>
+                  <td>
+                    <form class="text-center" method="POST" action="/stock/edit">
+                      <input type="hidden"  name="id" value="<%= @producto.id %>">
+                      <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                    </form>
+                  </td>
+                  <td>
+                    <form class="text-center" method="POST" action="/stock/alta">
+                      <input type="hidden"  name="id" value="<%= @producto.id %>">
+                      <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                    </form>
+                  </td>
+              <% end %>
+            </tr>
+          </table>
+    <% else %>
+          <div class="alert alert-danger">
+            No se encontró ningún producto con ese nombre
+          </div>
+    <% end %>
+    </div>
+    <hr>
+  <% end %>
+  <div class="row">
+  </div>
+  <div class="row">
+    <legend class="text-primary">
+      <h3>
+        Productos:
+      </h3>
+    </legend>
+    <table Class="table table-bordered table-striped table-hover">
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Descripción
+        </th>
+        <th>
+          Cantidad
+        </th>
+        <th>
+          Precio de compra
+        </th>
+        <th>
+          Precio de venta
+        </th>
+        <th>
+          Modificar
+        </th>
+        <th>
+          Borrar
+        </th>
+      </tr>
+      <% if @productos != nil %>
+        <% @productos.each do |producto| %>
+          <tr>
+            <td>
+              <%= producto.nombre %>
+            </td>
+            <td>
+              <%= producto.descripcion %>
+            </td>
+            <td>
+              <%= producto.cantidad %>
+            </td>
+            <td>
+              <%= producto.precioCompra %>
+            </td>
+            <td>
+              <%= producto.precioVenta %>
+            </td>
+            <td>
+              <form class="text-center" method="POST" action="/stock/edit">
+                <input type="hidden"  name="id" value="<%= producto.id %>">
+                <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+              </form>
+            </td>
+            <td>
+              <form class="text-center" method="POST" action="/stock/eliminar">
+                <input type="hidden"  name="id" value="<%= producto.id %>">
+                <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+              </form>
+            </td>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+  <div class="row">
+    <legend class="text-primary">
+      <h3>
+        Productos dados de baja:
+      </h3>
+    </legend>
+    <table Class="table table-bordered table-striped table-hover">
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Descripción
+        </th>
+        <th>
+          Cantidad
+        </th>
+        <th>
+          PrecioDeCompra
+        </th>
+        <th>
+          PrecioDeVenta
+        </th>
+        <th>
+          Modificar
+        </th>
+        <th>
+          Dar de alta
+        </th>
+      </tr>
+      <% if @productosBaja != nil %>
+          <% @productosBaja.each do |producto| %>
+              <tr>
+                <td>
+                  <%= producto.nombre %>
+                </td>
+                <td>
+                  <%= producto.descripcion %>
+                </td>
+                <td>
+                  <%= producto.cantidad %>
+                </td>
+                <td>
+                  <%= producto.precioCompra %>
+                </td>
+                <td>
+                  <%= producto.precioVenta %>
+                </td>
+                <td>
+                  <form class="text-center" method="POST" action="/stock/edit">
+                    <input type="hidden"  name="id" value="<%= producto.id %>">
+                    <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                  </form>
+                </td>
+                <td>
+                  <form class="text-center" method="POST" action="/stock/alta">
+                    <input type="hidden"  name="id" value="<%= producto.id %>">
+                    <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                  </form>
+                </td>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

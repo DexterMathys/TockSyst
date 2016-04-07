@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="row text-center">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <label class="navbar-brand">TockSyst</label>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="#">
+              <a class="active" href="/"><i class="fa fa-home fa-fw"></i> Inicio</a>
+            </li>
+            <li class="#">
+              <a class="active" href="/clientes"><i class="fa fa-users"></i> Clientes</a>
+            </li>
+            <% if current_user.role == 'clientes' || current_user.role == 'admin' %>
+                <li class="#">
+                  <a class="active" href="/clientes/nuevo"><i class="fa fa-user-plus"></i> Nuevo</a>
+                </li>
+            <% end %>
+
+            <li class="active">
+              <a class="active" href="/clientes/ayuda"><i class="fa fa-question-circle"></i> Ayuda</a>
+            </li>
+
+            <li class="#">
+              <a class="active" href="<%= edit_user_registration_path %>"><i class=" fa fa-pencil-square"></i> Editar perfil</a>
+            </li>
+            <li class="#">
+              <a class="active" href="<%= destroy_user_session_path %>"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center text-primary">
+        <h1>
+          Sector de Clientes - Ayuda
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% if current_user.role == 'clientes' || current_user.role == 'admin' %>
+    <div class="row">
+      <div class="col-md-12">
+        <legend class="text-primary">
+          <h3>
+
+          </h3>
+        </legend>
+        <div class="well">
+          Al igual que en el sector de Proveedores, el área de Clientes te facilitará la tarea de
+          organizar a todos tus clientes. Aquí te será posible administrar, es decir dar de alta,
+          modificar o dar de baja, a tus clientes y sus datos. Para poder acceder al alta de cliente
+          tendrás que clickear sobre Nuevo, y para poder realizar una modificación o eliminación tendrás
+          que clickear en el botón correspondiente presente en cada cliente, además puedes utilizar los buscadores
+          para localizar a un cliente determinado.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <legend class="text-primary">
+          <h3>
+            Nuevo cliente
+          </h3>
+        </legend>
+        <div class="well">
+          Para dar de alta a un nuevo
+          cliente debes ingresar en la pestaña Nuevo. Aquí se desplegará
+          un formulario que solicitará ingresar los datos pertinentes al
+          cliente, el nombre (como máximo 40 carateres, exceptuando
+          caracteres especiales como !, #, $, %, etc), dirección (como
+          máximo 100 caracteres, exceptuando los caracteres especiales
+          como !, #, $, %, etc), teléfono (como máximo
+          20 dígitos) y un monto de deuda (pudiendo ser una deuda positiva o
+          negativa). Luego de ingresar todos los datos debes presionar
+          Aceptar y el cliente será dado de alta.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <legend class="text-primary">
+          <h3>
+            Eliminar cliente
+          </h3>
+        </legend>
+        <div class="well">
+          Para eliminar un
+          cliente debemos primero ubicarlo a través del buscador presente en
+          la ventana principal de la sección de clientes. Podemos buscar a un
+          cliente por su nombre (máximo 40 caracteres, exceptuando caracteres
+          especiales como !, #, $, %, etc), ingresándolo y luego presionando
+          Buscar. Al encontrar al cliente se visualizarán 2 botones, Modificar
+          y Eliminar. Presionas en Eliminar y el cliente será dado de baja.
+          Si en algún momento deseas volver a dar de alta al cliente podrás
+          hacerlo desde la sección deModificar cliente.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <legend class="text-primary">
+          <h3>
+            Modificar cliente
+          </h3>
+        </legend>
+        <div class="well">
+          Para modificar un
+          cliente debemos primero ubicarlo a través del buscador presente en
+          la ventana principal de la sección de clientes. Podemos buscar a un
+          cliente por su nombre (máximo 40 caracteres, exceptuando caracteres
+          especiales como !, #, $, %, etc), ingresándolo y luego presionando
+          Buscar. Al encontrar al cliente se visualizarán 2 botones, Modificar
+          y Eliminar. Presionas en Modificar y el sistema te redireccionará a
+          la ventana de Modificar cliente. Se mostrarán todos los datos del
+          cliente para que los puedas modificar. Además de los datos del
+          cliente también se verá su Estado (0 = dado de baja y 1 = dado de
+          alta), si cambias este parámetro podrás dar de baja a un cliente
+          activo o dar de alta a un cliente inactivo.
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if current_user.role == 'ventas' %>
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="text-primary">
+            <h3>
+
+            </h3>
+          </legend>
+          <div class="well">
+            En el área de Clientes podrás visualizar listados de tus clientes dados de alta y de aquellos que
+            hayas dado de baja. También podrás utilizar el buscador para localizar a un cliente determinado y ver
+            todos sus datos.
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

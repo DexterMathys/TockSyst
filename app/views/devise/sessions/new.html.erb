@@ -1,0 +1,37 @@
+<div class="container text-center">
+  <div class="text-primary page-header">
+    <h1>
+      Bienvenido a TockSyst
+    </h1>
+  </div>
+  <div class="text-primary">
+    <h2>Inicia sesi&oacute;n!</h2>
+  </div>
+  <% if notice %>
+      <div class="alert alert-info">
+        <%= notice %>
+      </div>
+  <% end %>
+  <% if alert %>
+      <div class="alert alert-danger">
+        <%= alert %>
+      </div>
+  <% end %>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit "Iniciar sesión", { :class=>"btn btn-primary" } %>
+      </div>
+  <% end %>
+  <br>
+  <b>Si no tienes cuenta <%= render "devise/shared/links" %></b>
+</div>
