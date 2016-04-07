@@ -118,9 +118,10 @@
             el alta de la misma.
           </div>
         </div>
+        <% if current_user.role == 'compras' %>
         <div class="col-md-12">
           <h3 class="text-primary">
-            Proveedores
+            <a class="active" href="/proveedors"><i class="fa fa-users"></i> Proveedores</a>
           </h3>
           <hr>
           <div class="well">
@@ -128,10 +129,11 @@
             hayas dado de baja. También podrás utilizar el buscador para localizar a un proveedor determinado y ver
             todos sus datos.
           </div>
+        <% end %>
         </div>
     <% end %>
     <% if current_user.role == 'admin' || current_user.role == 'ventas' %>
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
           <h3 class="text-primary">
             <a class="active" href="/ventas"><i class="fa fa-file-text"></i> Ventas</a>
           </h3>
@@ -143,9 +145,10 @@
             desplegará todo lo necesario para que puedas realizar un alta exitoso de tu venta.
           </div>
         </div>
+        <% if current_user.role == 'ventas' %>
         <div class="col-md-12">
           <h3 class="text-primary">
-            Clientes
+            <a class="active" href="/clientes"><i class="fa fa-users"></i> Clientes</a>
           </h3>
           <hr>
           <div class="well">
@@ -154,6 +157,7 @@
             todos sus datos.
           </div>
         </div>
+        <% end %>
     <% end %>
   </div>
   <div class="row text-center">
