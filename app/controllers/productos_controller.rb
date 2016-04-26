@@ -73,11 +73,8 @@ class ProductosController < ApplicationController
 
   def create
     @creado = nil
-    @antes = Producto.count
-    Producto.create(nombre: params[:Nombre], descripcion: params[:Descripcion], cantidad: params[:Cantidad],
-                    precioCompra: params[:PrecioDeCompra], precioVenta: params[:PrecioDeVenta], estado: 'Activo')
-    @despues = Producto.count
-    if @despues > @antes
+    if Producto.create(nombre: params[:Nombre], descripcion: params[:Descripcion], cantidad: params[:Cantidad],
+                    precioCompra: params[:PrecioDeCompra], precioVenta: params[:PrecioDeVenta], estado: 'Activo').valid?
       @creado = true
       @mensaje = "El producto se dio de alta exitosamente"
       @alert = "alert-info"

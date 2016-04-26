@@ -12,13 +12,6 @@ class ComprasController < ApplicationController
     ProductoProvisorio.destroy_all
   end
 
-  def comprando
-    @fecha = params[:fecha]
-    @proveedor = Proveedor.find_by(nombre: params[:proveedor])
-    @productos = Producto.where(estado: 'Activo')
-    @productos_provisorios = ProductoProvisorio.all
-  end
-
   def create
     @productos = ProductoProvisorio.all
     @total = 0
@@ -42,6 +35,14 @@ class ComprasController < ApplicationController
     @compras = Compra.all
     render action: 'index'
   end
+
+  def comprando
+    @fecha = params[:fecha]
+    @proveedor = Proveedor.find_by(nombre: params[:proveedor])
+    @productos = Producto.where(estado: 'Activo')
+    @productos_provisorios = ProductoProvisorio.all
+  end
+
 
   def buscar
     @busqueda = true
