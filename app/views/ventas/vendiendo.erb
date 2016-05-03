@@ -167,13 +167,15 @@
     <div class="col-md-1">
     </div>
     <div class="col-md-10 text-center">
-      <form method="post" action="/ventas/buscar">
-        Buscar producto:
-        <input type="hidden" name="fecha" value="<%= @fecha %>">
-        <input type="hidden" name="cliente_id" value="<%= @cliente.id %>">
-        <input type="text" min="0" name="nombre">
-        <input type="submit" class="btn btn-primary" name="boton_nombre" value="Buscar">
-      </form>
+      <%= search_form_for @search, url: "/ventas/buscar", method: "post" do |f| %>
+          <div class="field text-center">
+            <%= f.label :name_cont, "Buscar producto" %>
+            <%= f.text_field :nombre_or_descripcion_cont, :required => 'true' %>
+            <%= f.submit "Buscar", class: 'btn btn-primary' %>
+            <input type="hidden" name="fecha" value="<%= @fecha %>">
+            <input type="hidden" name="cliente_id" value="<%= @cliente.id %>">
+          </div>
+      <% end %>
     </div>
   </div>
   <div class="row">
@@ -185,8 +187,7 @@
             Resultado de la búsqueda:
           </h3>
         </legend>
-        <% if @producto != nil %>
-
+        <% if !@result.first.nil? %>
             <table Class="table table-bordered table-striped table-hover">
               <tr>
                 <th>
@@ -208,32 +209,34 @@
                   Vender
                 </th>
               </tr>
-              <tr>
-                <td>
-                  <%= @producto.nombre %>
-                </td>
-                <td>
-                  <%= @producto.descripcion %>
-                </td>
-                <td>
-                  <%= @producto.cantidad %>
-                </td>
-                <td>
-                  <%= @producto.precioVenta %>
-                </td>
-                <form class="text-center" method="POST" action="/ventas/agregar">
+              <% @result.each do |prod| %>
+                <tr>
                   <td>
-                    <input type="number" min="0" max="<%= @producto.cantidad %>" name="cantidad_vender">
+                    <%= prod.nombre %>
                   </td>
                   <td>
-                    <input type="hidden" name="fecha" value="<%= @fecha %>">
-                    <input type="hidden" name="cliente_id" value="<%= @cliente.id %>">
-                    <input type="hidden"  name="id" value="<%= @producto.id %>">
-                    <input type="submit" class="btn btn-primary" name="vender_producto" value="Vender">
+                    <%= prod.descripcion %>
                   </td>
-                </form>
-              </tr>
-            </table>
+                  <td>
+                    <%= prod.cantidad %>
+                  </td>
+                  <td>
+                    <%= prod.precioVenta %>
+                  </td>
+                  <form class="text-center" method="POST" action="/ventas/agregar">
+                    <td>
+                      <input type="number" min="0" max="<%= prod.cantidad %>" name="cantidad_vender" required>
+                    </td>
+                    <td>
+                      <input type="hidden" name="fecha" value="<%= @fecha %>">
+                      <input type="hidden" name="cliente_id" value="<%= @cliente.id %>">
+                      <input type="hidden"  name="id" value="<%= prod.id %>">
+                      <input type="submit" class="btn btn-primary" name="vender_producto" value="Vender">
+                    </td>
+                  </form>
+                </tr>
+            <% end %>
+          </table>
       <% else %>
         <div class="alert alert-danger">
           No se encontró ningún producto con ese nombre
@@ -288,7 +291,7 @@
                 </td>
                 <form class="text-center" method="POST" action="/ventas/agregar">
                   <td>
-                    <input type="number" min="0" max="<%= producto.cantidad %>" name="cantidad_vender">
+                    <input type="number" min="0" max="<%= producto.cantidad %>" name="cantidad_vender" required>
                   </td>
                   <td>
                     <input type="hidden" name="fecha" value="<%= @fecha %>">

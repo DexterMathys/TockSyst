@@ -56,11 +56,9 @@ Rails.application.routes.draw do
   post '/compras/eliminar', to: 'compras#destroy'
   post '/compras/comprar', to: 'compras#create'
   post '/compras/buscar', to: 'compras#buscar'
+  post '/compras/buscar_compra', to: 'compras#buscar_compra'
   post '/compras/agregar', to: 'compras#agregar'
   post '/compras/eliminar', to: 'compras#destroy'
-  post '/compras/buscar_compra_numero', to: 'compras#buscar_numero'
-  post '/compras/buscar_compra_proveedor', to: 'compras#buscar_proveedor'
-  post '/compras/buscar_compra_fecha', to: 'compras#buscar_fecha'
   post '/compras/show', to: 'compras#show'
 
   #Sector de ventas
@@ -72,11 +70,9 @@ Rails.application.routes.draw do
   post '/ventas/eliminar', to: 'ventas#destroy'
   post '/ventas/vender', to: 'ventas#create'
   post '/ventas/buscar', to: 'ventas#buscar'
+  post '/ventas/buscar_venta', to: 'ventas#buscar_venta'
   post '/ventas/agregar', to: 'ventas#agregar'
   post '/ventas/eliminar', to: 'ventas#destroy'
-  post '/ventas/buscar_venta_numero', to: 'ventas#buscar_numero'
-  post '/ventas/buscar_venta_cliente', to: 'ventas#buscar_cliente'
-  post '/ventas/buscar_venta_fecha', to: 'ventas#buscar_fecha'
   post '/ventas/show', to: 'ventas#show'
 
   #Sector de usuarios

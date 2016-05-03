@@ -7,6 +7,8 @@ class ClientesController < ApplicationController
     @busqueda = nil
     @clientes = Cliente.where(estado: 'Activo')
     @clientesBaja = Cliente.where(estado: 'Inactivo')
+
+    @search = Cliente.search(params[:q])
   end
   def new
 
@@ -44,6 +46,8 @@ class ClientesController < ApplicationController
       end
       @clientes = Cliente.where(estado: 'Activo')
       @clientesBaja = Cliente.where(estado: 'Inactivo')
+      @search = Cliente.search(params[:q])
+
       render action: 'index'
 
   end
@@ -61,15 +65,19 @@ class ClientesController < ApplicationController
       end
       @clientes = Cliente.where(estado: 'Activo')
       @clientesBaja = Cliente.where(estado: 'Inactivo')
+      @search = Cliente.search(params[:q])
+
       render action: 'index'
 
   end
 
   def buscar
     @busqueda = true
-    @cliente = Cliente.find_by(nombre: params[:nombre])
     @clientes = Cliente.where(estado: 'Activo')
     @clientesBaja = Cliente.where(estado: 'Inactivo')
+
+    @search = Cliente.search(params[:q])
+    @result = @search.result
     render action: 'index'
   end
 

@@ -7,6 +7,8 @@ class ProveedorsController < ApplicationController
     @busqueda = nil
     @proveedores = Proveedor.where(estado: 'Activo')
     @proveedoresBaja = Proveedor.where(estado: 'Inactivo')
+
+    @search = Proveedor.search(params[:q])
   end
 
   def new
@@ -43,6 +45,8 @@ class ProveedorsController < ApplicationController
       end
       @proveedores = Proveedor.where(estado: 'Activo')
       @proveedoresBaja = Proveedor.where(estado: 'Inactivo')
+
+      @search = Proveedor.search(params[:q])
       render action: 'index'
 
   end
@@ -60,6 +64,8 @@ class ProveedorsController < ApplicationController
       end
       @proveedores = Proveedor.where(estado: 'Activo')
       @proveedoresBaja = Proveedor.where(estado: 'Inactivo')
+
+      @search = Proveedor.search(params[:q])
       render action: 'index'
 
   end
@@ -69,6 +75,9 @@ class ProveedorsController < ApplicationController
     @proveedor = Proveedor.find_by(nombre: params[:nombre])
     @proveedores = Proveedor.where(estado: 'Activo')
     @proveedoresBaja = Proveedor.where(estado: 'Inactivo')
+
+    @search = Proveedor.search(params[:q])
+    @result = @search.result
     render action: 'index'
   end
 

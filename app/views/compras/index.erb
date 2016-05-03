@@ -52,50 +52,31 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-    </div>
-    <table>
+
+    <table class="">
       <tr>
-        <form class="text-center" method="POST" action="/compras/buscar_compra_numero">
-          <td>
-            Buscar por número:
-          </td>
-          <td>
-            <input type="number" min="0" name="numero" required>
-          </td>
-          <td>
-            <input type="submit" class="btn btn-primary" name="boton_número" value="Buscar">
-          </td>
-        </form>
+          <%= search_form_for @search, url: "/compras/buscar_compra", method: "post" do |f| %>
+              <div class="field text-center">
+                <%= f.label :name_cont, "Buscar por proveedor" %>
+                <%= f.text_field :proveedor_nombre_cont, :required => 'true' %>
+                <%= f.submit "Buscar", class: 'btn btn-primary' %>
+              </div>
+          <% end %>
       </tr>
+      <tr><br></tr>
       <tr>
-        <form class="text-center" method="POST" action="/compras/buscar_compra_proveedor">
-          <td>
-            Buscar por proveedor:
-          </td>
-          <td>
-            <input type="text" min="0" name="proveedor" required>
-          </td>
-          <td>
-            <input type="submit" class="btn btn-primary" name="boton_proveedor" value="Buscar">
-          </td>
-        </form>
-      </tr>
-      <tr>
-        <form class="text-center" method="POST" action="/compras/buscar_compra_fecha">
-          <td>
-            Buscar por fecha:
-          </td>
-          <td>
-            <input type="date" min="0" name="fecha" required>
-          </td>
-          <td>
-            <input type="submit" class="btn btn-primary" name="boton_fecha" value="Buscar">
-          </td>
-        </form>
+          <%= search_form_for @search, url: "/compras/buscar_compra", method: "post" do |f| %>
+              <div class="field text-center">
+                <%= f.label :name_cont, "Buscar por fecha" %>
+                <%= f.date_field :fecha_cont, :required => 'true' %>
+                <%= f.submit "Buscar", class: 'btn btn-primary' %>
+              </div>
+          <% end %>
+          <hr>
       </tr>
     </table>
   </div>
+
   <% if @mensaje != nil %>
       <div class="row">
         <div class="col-md-12">
@@ -113,12 +94,9 @@
             Resultado de la búsqueda:
           </h3>
         </legend>
-        <% if @compra != nil && @compra.size > 0 %>
+        <% if !@result.first.nil? %>
           <table Class="table table-bordered table-striped table-hover">
             <tr>
-              <th>
-                Número
-              </th>
               <th>
                 Fecha
               </th>
@@ -132,11 +110,8 @@
                 Ver
               </th>
             </tr>
-            <% @compra.each do |comp| %>
+            <% @result.each do |comp| %>
               <tr>
-                <td>
-                  <%= comp.id %>
-                </td>
                 <td>
                   <%= comp.fecha %>
                 </td>
@@ -172,9 +147,6 @@
     <table Class="table table-bordered table-striped table-hover">
       <tr>
         <th>
-          Número
-        </th>
-        <th>
           Fecha
         </th>
         <th>
@@ -190,9 +162,6 @@
       <% if @compras != nil %>
           <% @compras.each do |compra| %>
               <tr>
-                <td>
-                  <%= compra.id %>
-                </td>
                 <td>
                   <%= compra.fecha %>
                 </td>

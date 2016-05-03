@@ -52,15 +52,18 @@
     </div>
   </div>
   <div class="row">
-    <form class="text-center" method="POST" action="/clientes/buscar">
-      Buscar cliente:
-      <input type="text" name="nombre" required>
-      <input type="submit" class="btn btn-primary" name="buscar" value="Buscar">
-    </form>
+    <%= search_form_for @search, url: "/clientes/buscar", method: "post" do |f| %>
+        <div class="field text-center">
+          <%= f.label :name_cont, "Buscar cliente" %>
+          <%= f.text_field :nombre_or_direccion_or_telefono_or_estado_cont, :required => 'true' %>
+          <%= f.submit "Buscar", class: 'btn btn-primary' %>
+        </div>
+    <% end %>
     <hr>
   </div>
   <div class="row">
   </div>
+
   <% if @mensaje != nil %>
       <div class="row">
         <div class="col-md-12">
@@ -78,7 +81,7 @@
             Resultado de la búsqueda:
           </h3>
         </legend>
-        <% if @cliente != nil %>
+        <% if !@result.first.nil? %>
             <table Class="table table-bordered table-striped table-hover">
               <tr>
                 <th>
@@ -100,67 +103,63 @@
                     <th>
                       Modificar
                     </th>
-                    <% if @cliente.estado == "Activo" %>
-                        <th>
-                          Borrar
-                        </th>
-                    <% else %>
-                        <th>
-                          Dar de alta
-                        </th>
-                    <% end %>
+                    <th>
+                      Borrar / Dar de alta
+                    </th>
                 <% end %>
               </tr>
-              <tr>
-                <td>
-                  <%= @cliente.nombre %>
-                </td>
-                <td>
-                  <%= @cliente.direccion %>
-                </td>
-                <td>
-                  <%= @cliente.telefono %>
-                </td>
-                <td>
-                  <%= @cliente.deuda %>
-                </td>
-                <td>
-                  <%= @cliente.estado %>
-                </td>
-                <% if current_user.role == 'clientes' || current_user.role == 'admin' %>
-                    <% if @cliente.estado == "Activo" %>
-                        <td>
-                          <form class="text-center" method="POST" action="/clientes/edit">
-                            <input type="hidden"  name="id" value="<%= @cliente.id %>">
-                            <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
-                          </form>
-                        </td>
-                        <td>
-                          <form class="text-center" method="POST" action="/clientes/eliminar">
-                            <input type="hidden"  name="id" value="<%= @cliente.id %>">
-                            <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
-                          </form>
-                        </td>
-                    <% else %>
-                        <td>
-                          <form class="text-center" method="POST" action="/clientes/edit">
-                            <input type="hidden"  name="id" value="<%= @cliente.id %>">
-                            <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
-                          </form>
-                        </td>
-                        <td>
-                          <form class="text-center" method="POST" action="/clientes/alta">
-                            <input type="hidden"  name="id" value="<%= @cliente.id %>">
-                            <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
-                          </form>
-                        </td>
-                    <% end %>
-                <% end %>
-              </tr>
-            </table>
+              <% @result.each do |cliente| %>
+                  <tr>
+                    <td>
+                      <%= cliente.nombre %>
+                    </td>
+                    <td>
+                      <%= cliente.direccion %>
+                    </td>
+                    <td>
+                      <%= cliente.telefono %>
+                    </td>
+                    <td>
+                      <%= cliente.deuda %>
+                    </td>
+                    <td>
+                      <%= cliente.estado %>
+                    </td>
+                    <% if current_user.role == 'clientes' || current_user.role == 'admin' %>
+                        <% if cliente.estado == "Activo" %>
+                            <td>
+                              <form class="text-center" method="POST" action="/clientes/edit">
+                                <input type="hidden"  name="id" value="<%= cliente.id %>">
+                                <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                              </form>
+                            </td>
+                            <td>
+                              <form class="text-center" method="POST" action="/clientes/eliminar">
+                                <input type="hidden"  name="id" value="<%= cliente.id %>">
+                                <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+                              </form>
+                            </td>
+                        <% else %>
+                            <td>
+                              <form class="text-center" method="POST" action="/clientes/edit">
+                                <input type="hidden"  name="id" value="<%= cliente.id %>">
+                                <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                              </form>
+                            </td>
+                            <td>
+                              <form class="text-center" method="POST" action="/clientes/alta">
+                                <input type="hidden"  name="id" value="<%= cliente.id %>">
+                                <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                              </form>
+                            </td>
+                        <% end %>
+                  </tr>
+              <% end %>
+            <% end %>
+        </table>
       <% else %>
         <div class="alert alert-danger">
-          No se encontró ningún cliente con ese nombre
+          No se encontró ningún cliente
         </div>
       <% end %>
       </div>

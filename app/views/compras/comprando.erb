@@ -168,13 +168,15 @@
       <div class="col-md-1">
       </div>
       <div class="col-md-10 text-center">
-        <form method="post" action="/compras/buscar">
-          Buscar producto:
-          <input type="hidden" name="fecha" value="<%= @fecha %>">
-          <input type="hidden" name="proveedor_id" value="<%= @proveedor.id %>">
-          <input type="text" min="0" name="nombre">
-          <input type="submit" class="btn btn-primary" name="boton_nombre" value="Buscar">
-        </form>
+        <%= search_form_for @search, url: "/compras/buscar", method: "post" do |f| %>
+            <div class="field text-center">
+              <%= f.label :name_cont, "Buscar producto" %>
+              <%= f.text_field :nombre_or_descripcion_cont, :required => 'true' %>
+              <%= f.submit "Buscar", class: 'btn btn-primary' %>
+              <input type="hidden" name="fecha" value="<%= @fecha %>">
+              <input type="hidden" name="proveedor_id" value="<%= @proveedor.id %>">
+            </div>
+        <% end %>
       </div>
     </div>
     <div class="row">
@@ -186,7 +188,7 @@
               Resultado de la búsqueda:
             </h3>
           </legend>
-          <% if @producto != nil %>
+          <% if !@result.first.nil? %>
               <table Class="table table-bordered table-striped table-hover">
                 <tr>
                   <th>
@@ -208,35 +210,37 @@
                     Comprar
                   </th>
                 </tr>
-                <tr>
-                  <td>
-                    <%= @producto.nombre %>
-                  </td>
-                  <td>
-                    <%= @producto.descripcion %>
-                  </td>
-                  <td>
-                    <%= @producto.cantidad %>
-                  </td>
-                  <td>
-                    <%= @producto.precioCompra %>
-                  </td>
-                  <form class="text-center" method="POST" action="/compras/agregar">
-                    <td>
-                      <input type="number" min="0" name="cantidad_comprar">
-                    </td>
-                    <td>
-                      <input type="hidden" name="fecha" value="<%= @fecha %>">
-                      <input type="hidden" name="proveedor_id" value="<%= @proveedor.id %>">
-                      <input type="hidden"  name="id" value="<%= @producto.id %>">
-                      <input type="submit" class="btn btn-primary" name="comprar_producto" value="Comprar">
-                    </td>
-                  </form>
-                </tr>
-              </table>
+                <% @result.each do |prod| %>
+                    <tr>
+                      <td>
+                        <%= prod.nombre %>
+                      </td>
+                      <td>
+                        <%= prod.descripcion %>
+                      </td>
+                      <td>
+                        <%= prod.cantidad %>
+                      </td>
+                      <td>
+                        <%= prod.precioCompra %>
+                      </td>
+                      <form class="text-center" method="POST" action="/compras/agregar">
+                        <td>
+                          <input type="number" min="0" name="cantidad_comprar">
+                        </td>
+                        <td>
+                          <input type="hidden" name="fecha" value="<%= @fecha %>">
+                          <input type="hidden" name="proveedor_id" value="<%= @proveedor.id %>">
+                          <input type="hidden"  name="id" value="<%= prod.id %>">
+                          <input type="submit" class="btn btn-primary" name="comprar_producto" value="Comprar">
+                        </td>
+                      </form>
+                    </tr>
+              <% end %>
+          </table>
         <% else %>
               <div class="alert alert-danger">
-                No se encontró ningún producto con ese nombre
+                No se encontró ningún producto
               </div>
         <% end %>
         </div>

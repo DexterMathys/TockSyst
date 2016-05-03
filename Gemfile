@@ -28,10 +28,9 @@ gem 'twitter-bootstrap-rails'
 gem 'font-awesome-rails'
 
 # Facebook y Twitter
-gem 'devise'
+gem 'devise', '3.5.7'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 
 # Postgresql
 gem 'pg'
@@ -39,7 +38,15 @@ gem 'pg'
 # Heroku
 gem 'rails_12factor'
 
+# Permisos
 gem 'cancan'
+
+# Búsquedas
+gem 'ransack'
+
+# Paginacion
+gem 'kaminari', '0.15'
+gem 'kaminari-bootstrap'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

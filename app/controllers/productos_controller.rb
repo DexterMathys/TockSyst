@@ -6,6 +6,9 @@ class ProductosController < ApplicationController
     @busqueda = nil
     @productos = Producto.where(estado: 'Activo')
     @productosBaja = Producto.where(estado: 'Inactivo')
+
+    @search = Producto.search(params[:q])
+
   end
 
   def new
@@ -25,6 +28,9 @@ class ProductosController < ApplicationController
     @producto = Producto.find_by(nombre: params[:nombre])
     @productos = Producto.where(estado: 'Activo')
     @productosBaja = Producto.where(estado: 'Inactivo')
+
+    @search = Producto.search(params[:q])
+    @result = @search.result
     render action: 'index'
   end
 
@@ -52,6 +58,8 @@ class ProductosController < ApplicationController
     end
     @productos = Producto.where(estado: 'Activo')
     @productosBaja = Producto.where(estado: 'Inactivo')
+
+    @search = Compra.search(params[:q])
     render action: 'index'
   end
 
@@ -68,6 +76,7 @@ class ProductosController < ApplicationController
     end
     @productos = Producto.where(estado: 'Activo')
     @productosBaja = Producto.where(estado: 'Inactivo')
+    @search = Compra.search(params[:q])
     render action: 'index'
   end
 

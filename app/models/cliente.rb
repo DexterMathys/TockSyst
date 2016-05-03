@@ -9,4 +9,6 @@ class Cliente < ActiveRecord::Base
 
   validates_uniqueness_of :nombre
 
+  default_scope ->{ order('created_at') }
+
 end

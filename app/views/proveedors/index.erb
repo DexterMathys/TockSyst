@@ -52,11 +52,13 @@
     </div>
   </div>
   <div class="row">
-    <form class="text-center" method="POST" action="/proveedors/buscar">
-      Buscar proveedor:
-      <input type="text" name="nombre" required>
-      <input type="submit" class="btn btn-primary" name="buscar" value="Buscar">
-    </form>
+    <%= search_form_for @search, url: "/proveedors/buscar", method: "post" do |f| %>
+        <div class="field text-center">
+          <%= f.label :name_cont, "Buscar proveedor" %>
+          <%= f.text_field :nombre_or_direccion_or_telefono_cont, :required => 'true' %>
+          <%= f.submit "Buscar", class: 'btn btn-primary' %>
+        </div>
+    <% end %>
     <hr>
   </div>
   <div class="row">
@@ -78,8 +80,7 @@
             Resultado de la búsqueda:
           </h3>
         </legend>
-        <% if @proveedor != nil %>
-
+        <% if !@result.first.nil? %>
             <table Class="table table-bordered table-striped table-hover">
               <tr>
                 <th>
@@ -98,69 +99,64 @@
                   Estado
                 </th>
                 <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
-
                     <th>
                       Modificar
                     </th>
-                    <% if @proveedor.estado == "Activo" %>
-                        <th>
-                          Borrar
-                        </th>
-                    <% else %>
-                        <th>
-                          Dar de alta
-                        </th>
-                    <% end %>
+                    <th>
+                      Borrar / Dar de alta
+                    </th>
                 <% end %>
               </tr>
-              <tr>
-                <td>
-                  <%= @proveedor.nombre %>
-                </td>
-                <td>
-                  <%= @proveedor.direccion %>
-                </td>
-                <td>
-                  <%= @proveedor.telefono %>
-                </td>
-                <td>
-                  <%= @proveedor.deuda %>
-                </td>
-                <td>
-                  <%= @proveedor.estado %>
-                </td>
-                <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
+              <% @result.each do |proveedor| %>
+                  <tr>
+                    <td>
+                      <%= proveedor.nombre %>
+                    </td>
+                    <td>
+                      <%= proveedor.direccion %>
+                    </td>
+                    <td>
+                      <%= proveedor.telefono %>
+                    </td>
+                    <td>
+                      <%= proveedor.deuda %>
+                    </td>
+                    <td>
+                      <%= proveedor.estado %>
+                    </td>
+                    <% if current_user.role == 'proveedores' || current_user.role == 'admin' %>
 
-                    <% if @proveedor.estado == "Activo" %>
-                        <td>
-                          <form class="text-center" method="POST" action="/proveedors/edit">
-                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
-                            <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
-                          </form>
-                        </td>
-                        <td>
-                          <form class="text-center" method="POST" action="/proveedors/eliminar">
-                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
-                            <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
-                          </form>
-                        </td>
-                    <% else %>
-                        <td>
-                          <form class="text-center" method="POST" action="/proveedors/edit">
-                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
-                            <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
-                          </form>
-                        </td>
-                        <td>
-                          <form class="text-center" method="POST" action="/proveedors/alta">
-                            <input type="hidden"  name="id" value="<%= @proveedor.id %>">
-                            <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
-                          </form>
-                        </td>
+                        <% if proveedor.estado == "Activo" %>
+                            <td>
+                              <form class="text-center" method="POST" action="/proveedors/edit">
+                                <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                                <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                              </form>
+                            </td>
+                            <td>
+                              <form class="text-center" method="POST" action="/proveedors/eliminar">
+                                <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                                <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+                              </form>
+                            </td>
+                        <% else %>
+                            <td>
+                              <form class="text-center" method="POST" action="/proveedors/edit">
+                                <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                                <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                              </form>
+                            </td>
+                            <td>
+                              <form class="text-center" method="POST" action="/proveedors/alta">
+                                <input type="hidden"  name="id" value="<%= proveedor.id %>">
+                                <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                              </form>
+                            </td>
+                        <% end %>
                     <% end %>
-                <% end %>
-              </tr>
-            </table>
+                  </tr>
+            <% end %>
+        </table>
       <% else %>
         <div class="alert alert-danger">
           No se encontró ningún proveedor con ese nombre

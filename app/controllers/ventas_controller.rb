@@ -5,6 +5,9 @@ class VentasController < ApplicationController
 
   def index
     @ventas = Venta.all
+
+    @search = Venta.search(params[:q])
+
   end
 
   def new
@@ -17,6 +20,8 @@ class VentasController < ApplicationController
     @cliente = Cliente.find_by(nombre: params[:cliente])
     @productos = Producto.where(estado: 'Activo')
     @productos_provisorios = ProductoProvisorio.all
+
+    @search = Producto.search(params[:q])
   end
 
   def create
@@ -40,6 +45,8 @@ class VentasController < ApplicationController
     @mensaje = 'La venta se realizo exitosamente'
     @alert = 'alert-info'
     @ventas = Venta.all
+
+    @search = Venta.search(params[:q])
     render action: 'index'
   end
 
@@ -50,6 +57,9 @@ class VentasController < ApplicationController
     @cliente = Cliente.find(params[:cliente_id])
     @productos = Producto.where(estado: 'Activo')
     @productos_provisorios = ProductoProvisorio.all
+
+    @search = Producto.search(params[:q])
+    @result = @search.result.to_a.select{ |prod| prod.estado =='Activo'}
     render action: 'vendiendo'
   end
 
@@ -61,6 +71,8 @@ class VentasController < ApplicationController
     ProductoProvisorio.create(id_producto: @producto.id,
                               cantidad: params[:cantidad_vender])
     @productos_provisorios = ProductoProvisorio.all
+
+    @search = Producto.search(params[:q])
     render action: 'vendiendo'
   end
 
@@ -71,13 +83,27 @@ class VentasController < ApplicationController
     @cliente = Cliente.find(params[:cliente_id])
     @productos = Producto.where(estado: 'Activo')
     @productos_provisorios = ProductoProvisorio.all
+    @search = Producto.search(params[:q])
     render action: 'vendiendo'
+  end
+
+  def buscar_venta
+    @busqueda = true
+    @ventas = Venta.all
+    @venta = Venta.where(id: params[:numero])
+
+    @search = Venta.search(params[:q])
+    @result = @search.result.includes(:cliente)
+    render action: 'index'
   end
 
   def buscar_numero
     @busqueda = true
     @ventas = Venta.all
     @venta = Venta.where(id: params[:numero])
+
+    @search = Venta.search(params[:q])
+    @result = @search.result.includes(:cliente)
     render action: 'index'
   end
 

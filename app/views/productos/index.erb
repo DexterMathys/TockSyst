@@ -57,14 +57,19 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <form class="text-center" method="POST" action="/stock/buscar">
-        Buscar producto:
-        <input type="text"  name="nombre" required>
-        <input type="submit" class="btn btn-primary" name="boton_nombre" value="Buscar">
-      </form>
+      <%= search_form_for @search, url: "/stock/buscar", method: "post" do |f| %>
+          <div class="field text-center">
+            <%= f.label :name_cont, "Buscar producto" %>
+            <%= f.text_field :nombre_or_descripcion_cont, :required => 'true' %>
+            <%= f.submit "Buscar", class: 'btn btn-primary' %>
+          </div>
+      <% end %>
     </div>
   </div>
   <hr>
+
+
+
   <% if @mensaje != nil %>
       <div class="row">
         <div class="col-md-12">
@@ -82,7 +87,7 @@
           Resultado de la búsqueda:
         </h3>
       </legend>
-      <% if @producto != nil %>
+      <% if !@result.first.nil? %>
 
           <table Class="table table-bordered table-striped table-hover">
             <tr>
@@ -107,67 +112,63 @@
               <th>
                 Modificar
               </th>
-              <% if @producto.estado == "Activo" %>
-                  <th>
-                    Borrar
-                  </th>
-              <% else %>
-                  <th>
-                    Dar de alta
-                  </th>
-              <% end %>
+              <th>
+                Borrar / Dar de alta
+              </th>
             </tr>
-            <tr>
-              <td>
-                <%= @producto.nombre %>
-              </td>
-              <td>
-                <%= @producto.descripcion %>
-              </td>
-              <td>
-                <%= @producto.cantidad %>
-              </td>
-              <td>
-                <%= @producto.precioCompra %>
-              </td>
-              <td>
-                <%= @producto.precioVenta %>
-              </td>
-              <td>
-                <%= @producto.estado %>
-              </td>
-              <% if @producto.estado == "Activo" %>
-                  <td>
-                    <form class="text-center" method="POST" action="/stock/edit">
-                      <input type="hidden"  name="id" value="<%= @producto.id %>">
-                      <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
-                    </form>
-                  </td>
-                  <td>
-                    <form class="text-center" method="POST" action="/stock/eliminar">
-                      <input type="hidden"  name="id" value="<%= @producto.id %>">
-                      <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
-                    </form>
-                  </td>
-              <% else %>
-                  <td>
-                    <form class="text-center" method="POST" action="/stock/edit">
-                      <input type="hidden"  name="id" value="<%= @producto.id %>">
-                      <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
-                    </form>
-                  </td>
-                  <td>
-                    <form class="text-center" method="POST" action="/stock/alta">
-                      <input type="hidden"  name="id" value="<%= @producto.id %>">
-                      <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
-                    </form>
-                  </td>
-              <% end %>
-            </tr>
+            <% @result.each do |producto| %>
+              <tr>
+                <td>
+                  <%= producto.nombre %>
+                </td>
+                <td>
+                  <%= producto.descripcion %>
+                </td>
+                <td>
+                  <%= producto.cantidad %>
+                </td>
+                <td>
+                  <%= producto.precioCompra %>
+                </td>
+                <td>
+                  <%= producto.precioVenta %>
+                </td>
+                <td>
+                  <%= producto.estado %>
+                </td>
+                <% if producto.estado == "Activo" %>
+                    <td>
+                      <form class="text-center" method="POST" action="/stock/edit">
+                        <input type="hidden"  name="id" value="<%= producto.id %>">
+                        <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                      </form>
+                    </td>
+                    <td>
+                      <form class="text-center" method="POST" action="/stock/eliminar">
+                        <input type="hidden"  name="id" value="<%= producto.id %>">
+                        <input type="submit" class="btn btn-primary" name="eliminar" value="Borrar">
+                      </form>
+                    </td>
+                <% else %>
+                    <td>
+                      <form class="text-center" method="POST" action="/stock/edit">
+                        <input type="hidden"  name="id" value="<%= producto.id %>">
+                        <input type="submit" class="btn btn-primary" name="modificar" value="Modificar">
+                      </form>
+                    </td>
+                    <td>
+                      <form class="text-center" method="POST" action="/stock/alta">
+                        <input type="hidden"  name="id" value="<%= producto.id %>">
+                        <input type="submit" class="btn btn-primary" name="alta" value="Dar de alta">
+                      </form>
+                    </td>
+                <% end %>
+              </tr>
+          <% end %>
           </table>
     <% else %>
           <div class="alert alert-danger">
-            No se encontró ningún producto con ese nombre
+            No se encontró ningún producto
           </div>
     <% end %>
     </div>

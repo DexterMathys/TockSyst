@@ -5,6 +5,16 @@ class ComprasController < ApplicationController
 
   def index
     @compras = Compra.all
+    @search = Compra.search(params[:q])
+  end
+
+  def buscar_compra
+    @busqueda = true
+    @compras = Compra.all
+
+    @search = Compra.search(params[:q])
+    @result = @search.result.includes(:proveedor)
+    render action: 'index'
   end
 
   def new
@@ -33,6 +43,8 @@ class ComprasController < ApplicationController
     @mensaje = 'La compra se realizo exitosamente'
     @alert = 'alert-info'
     @compras = Compra.all
+    @search = Compra.search(params[:q])
+
     render action: 'index'
   end
 
@@ -41,6 +53,8 @@ class ComprasController < ApplicationController
     @proveedor = Proveedor.find_by(nombre: params[:proveedor])
     @productos = Producto.where(estado: 'Activo')
     @productos_provisorios = ProductoProvisorio.all
+
+    @search = Producto.search(params[:q])
   end
 
 
@@ -51,6 +65,9 @@ class ComprasController < ApplicationController
     @proveedor = Proveedor.find(params[:proveedor_id])
     @productos = Producto.where(estado: 'Activo')
     @productos_provisorios = ProductoProvisorio.all
+
+    @search = Producto.search(params[:q])
+    @result = @search.result.to_a.select{ |prod| prod.estado =='Activo'}
     render action: 'comprando'
   end
 
@@ -62,6 +79,8 @@ class ComprasController < ApplicationController
     ProductoProvisorio.create(id_producto: @producto.id,
                                cantidad: params[:cantidad_comprar])
     @productos_provisorios = ProductoProvisorio.all
+
+    @search = Producto.search(params[:q])
     render action: 'comprando'
   end
 
@@ -72,33 +91,8 @@ class ComprasController < ApplicationController
     @proveedor = Proveedor.find(params[:proveedor_id])
     @productos = Producto.where(estado: 'Activo')
     @productos_provisorios = ProductoProvisorio.all
+    @search = Producto.search(params[:q])
     render action: 'comprando'
-  end
-
-  def buscar_numero
-    @busqueda = true
-    @compras = Compra.all
-    @compra = Compra.where(id: params[:numero])
-    render action: 'index'
-  end
-
-  def buscar_proveedor
-    @busqueda = true
-    @compras = Compra.all
-    @proveedor = Proveedor.find_by(nombre: params[:proveedor])
-    if @proveedor != nil
-      @compra = Compra.where(proveedor_id: @proveedor.id)
-    else
-      @compra = nil
-    end
-    render action: 'index'
-  end
-
-  def buscar_fecha
-    @busqueda = true
-    @compras = Compra.all
-    @compra = Compra.where(fecha: params[:fecha])
-    render action: 'index'
   end
 
   def show
