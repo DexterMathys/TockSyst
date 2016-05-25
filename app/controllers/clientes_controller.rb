@@ -34,10 +34,7 @@ class ClientesController < ApplicationController
   end
 
   def destroy
-      @antes = Cliente.where(estado: 'Activo').count
-      Cliente.find(params[:id]).update(estado: 'Inactivo')
-      @despues = Cliente.where(estado: 'Activo').count
-      if @antes > @despues
+      if Cliente.find(params[:id]).update(estado: 'Inactivo').valid?
         @mensaje = "El cliente se borro exitosamente"
         @alert = "alert-info"
       else
@@ -53,10 +50,7 @@ class ClientesController < ApplicationController
   end
 
   def alta
-      @antes = Cliente.where(estado: 'Inactivo').count
-      Cliente.find(params[:id]).update(estado: 'Activo')
-      @despues = Cliente.where(estado: 'Inactivo').count
-      if @antes > @despues
+      if Cliente.find(params[:id]).update(estado: 'Activo').valid?
         @mensaje = "El cliente se dio de alta exitosamente"
         @alert = "alert-info"
       else
@@ -83,7 +77,6 @@ class ClientesController < ApplicationController
 
   def edit
       @cliente = Cliente.find(params[:id])
-
   end
 
   def update

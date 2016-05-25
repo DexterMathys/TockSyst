@@ -11,9 +11,7 @@ class UsuariosController < ApplicationController
     @usuario = User.find(params[:id])
     @rol = params[:rol]
     if @usuario.role != @rol
-      @antes = @usuario.role
-      @usuario.update(role: @rol)
-      if @antes != @usuario.role
+      if @usuario.update(role: @rol).valid?
         @mensaje = 'El tipo de usuario se modificó exitosamente'
         @alert = 'alert-info'
       else

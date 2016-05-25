@@ -4,8 +4,32 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+proveedor1:
+ id: 1
+ nombre: proveedor1
+ direccion: 1
+ telefono: 1
+ deuda: 0.0
+ estado: Activo
+ created_at: 2016-05-16 21:07:54.550937
+ updated_at: 2016-05-16 21:08:04.783662
+
+proveedor2:
+ id: 2
+ nombre: proveedor2
+ direccion: 2
+ telefono: 2
+ deuda: 0.0
+ estado: Activo
+ created_at: 2016-05-16 21:13:54.550937
+ updated_at: 2016-05-16 21:14:04.783662
+
+proveedor3:
+  id: 3
+  nombre: proveedor3
+  direccion: 3
+  telefono: 3
+  deuda: 0.0
+  estado: Inactivo
+  created_at: 2016-05-16 21:14:54.550937
+  updated_at: 2016-05-16 21:15:04.783662

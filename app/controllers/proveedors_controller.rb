@@ -33,10 +33,7 @@ class ProveedorsController < ApplicationController
   end
 
   def destroy
-      @antes = Proveedor.where(estado: 'Activo').count
-      Proveedor.find(params[:id]).update(estado: 'Inactivo')
-      @despues = Proveedor.where(estado: 'Activo').count
-      if @antes > @despues
+      if Proveedor.find(params[:id]).update(estado: 'Inactivo').valid?
         @mensaje = "El proveedor se borro exitosamente"
         @alert = "alert-info"
       else
@@ -52,10 +49,7 @@ class ProveedorsController < ApplicationController
   end
 
   def alta
-      @antes = Proveedor.where(estado: 'Inactivo').count
-      Proveedor.find(params[:id]).update(estado: 'Activo')
-      @despues = Proveedor.where(estado: 'Inactivo').count
-      if @antes > @despues
+      if Proveedor.find(params[:id]).update(estado: 'Activo').valid?
         @mensaje = "El proveedor se dio de alta exitosamente"
         @alert = "alert-info"
       else

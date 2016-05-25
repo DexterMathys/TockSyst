@@ -46,10 +46,7 @@ class ProductosController < ApplicationController
   end
 
   def destroy
-    @antes = Producto.where(estado: 'Activo').count
-    Producto.find(params[:id]).update(estado: 'Inactivo')
-    @despues = Producto.where(estado: 'Activo').count
-    if @antes > @despues
+    if Producto.find(params[:id]).update(estado: 'Inactivo').valid?
       @mensaje = "El producto se borro exitosamente"
       @alert = "alert-info"
     else
@@ -64,10 +61,7 @@ class ProductosController < ApplicationController
   end
 
   def alta
-    @antes = Producto.where(estado: 'Inactivo').count
-    Producto.find(params[:id]).update(estado: 'Activo')
-    @despues = Producto.where(estado: 'Inactivo').count
-    if @antes > @despues
+    if Producto.find(params[:id]).update(estado: 'Activo').valid?
       @mensaje = "El producto se dio de alta exitosamente"
       @alert = "alert-info"
     else

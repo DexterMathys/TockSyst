@@ -4,8 +4,46 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+producto1:
+  id: 1
+  nombre: prod1
+  descripcion: 1
+  cantidad: 1
+  precioCompra: 1.0
+  precioVenta: 10.0
+  estado: Activo
+  created_at: 2016-05-16 21:24:54.550937
+  updated_at: 2016-05-16 21:25:04.783662
+
+producto2:
+  id: 2
+  nombre: prod2
+  descripcion: 2
+  cantidad: 2
+  precioCompra: 2.0
+  precioVenta: 20.0
+  estado: Activo
+  created_at: 2016-05-16 21:25:54.550937
+  updated_at: 2016-05-16 21:26:04.783662
+
+producto3:
+  id: 3
+  nombre: prod3
+  descripcion: 3
+  cantidad: 3
+  precioCompra: 3.0
+  precioVenta: 30.0
+  estado: Inactivo
+  created_at: 2016-05-16 21:26:54.550937
+  updated_at: 2016-05-16 21:27:04.783662
+
+producto4:
+  id: 4
+  nombre: prod4
+  descripcion: 4
+  cantidad: 4
+  precioCompra: 4.0
+  precioVenta: 40.0
+  estado: Inactivo
+  created_at: 2016-05-16 21:28:54.550937
+  updated_at: 2016-05-16 21:29:04.783662

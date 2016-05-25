@@ -4,8 +4,80 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+user_stock:
+  id: 1
+  role: stock
+  email: stock@stock.com
+  encrypted_password: $2a$10$4YE.SdFY7YFgPTBowLx6.O8X.KxJ3YOu4WrNvPJWYjK5Vud5txLZO
+  sign_in_count: 1
+  current_sign_in_at: 2016-05-16 21:57:44.502641
+  last_sign_in_at: 2016-05-16 21:56:16.608707
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2016-05-16 21:55:54.550937
+  updated_at: 2016-05-16 21:56:04.783662
+
+user_compras:
+  id: 2
+  role: compras
+  email: compras@compras.com
+  encrypted_password: $2a$10$MrPbmB.QkL7CM/7Z40QjX.rTJQF/ynIP2oM9vGRI5QIetcJOhXe2K
+  sign_in_count: 1
+  current_sign_in_at: 2016-05-16 22:05:44.502641
+  last_sign_in_at: 2016-05-16 22:04:16.608707
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2016-05-16 22:03:54.550937
+  updated_at: 2016-05-16 22:04:04.783662
+
+user_ventas:
+  id: 3
+  role: ventas
+  email: ventas@ventas.com
+  encrypted_password: $2a$10$qloTtFL3/qNAyY21U3WVheIapk6SxjXIBWRp4T0LgoKDjka9Se.d.
+  sign_in_count: 1
+  current_sign_in_at: 2016-05-16 22:08:44.502641
+  last_sign_in_at: 2016-05-16 22:07:16.608707
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2016-05-16 22:06:54.550937
+  updated_at: 2016-05-16 22:07:04.783662
+
+user_clientes:
+  id: 4
+  role: clientes
+  email: clientes@clientes.com
+  encrypted_password: $2a$10$qLFKDjdt1AOdMDKDbNZq/OOByNKe6IwbEma29VHeNHRdj5vAXOdSu
+  sign_in_count: 1
+  current_sign_in_at: 2016-05-16 22:12:44.502641
+  last_sign_in_at: 2016-05-16 22:11:16.608707
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2016-05-16 22:10:54.550937
+  updated_at: 2016-05-16 22:11:04.783662
+
+user_proveedores:
+  id: 5
+  role: proveedores
+  email: proveedores@proveedores.com
+  encrypted_password: $2a$10$zW1At3coRFhkC5bvuF8Eg.MjgjOPPC/4kVBlHdi9yPw4V.FluqIzS
+  sign_in_count: 1
+  current_sign_in_at: 2016-05-16 22:16:44.502641
+  last_sign_in_at: 2016-05-16 22:15:16.608707
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2016-05-16 22:14:54.550937
+  updated_at: 2016-05-16 22:15:04.783662
+
+user_admin:
+  id: 6
+  role: admin
+  email: admin@admin.com
+  encrypted_password: $2a$10$W5v603kUMUS7jukD3GLvS.ikanGERY8O9OWcH8D2XDyYZmaK/lOGa
+  sign_in_count: 1
+  current_sign_in_at: 2016-05-16 22:20:44.502641
+  last_sign_in_at: 2016-05-16 22:19:16.608707
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2016-05-16 22:18:54.550937
+  updated_at: 2016-05-16 22:19:04.783662
